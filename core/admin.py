@@ -9,3 +9,5 @@ class StudentAdmin(ImportExportModelAdmin):
 
 admin.site.register(models.User, BaseUserAdmin)
 admin.site.register(models.Student, StudentAdmin)
+admin.site.register(models.Test)
+admin.site.register(models.TestSubmission)
