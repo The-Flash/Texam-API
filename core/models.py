@@ -29,12 +29,13 @@ class StudentResource(resources.ModelResource):
         model = Student
 
 class Test(models.Model):
-    test_id = models.CharField(max_length=10)
+    test_id = models.CharField(max_length=10, unique=True)
     name = models.CharField(max_length=200)
     lecturer = models.ForeignKey("core.User", on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now)
     submission_time = models.DateTimeField()
     allow_late_submission = models.BooleanField(default=True)
+    description = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name

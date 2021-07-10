@@ -1,0 +1,23 @@
+<header class="p-3 bg-dark">
+    <div class="container-fluid">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="{% url 'texam:home' %}" class="text-white d-flex align-items-center mb-2 mb-lg-0 text-decoration-none">
+          Texam
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        </ul>
+
+        <div class="dropdown text-end">
+          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle text-white" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="material-icons text-white" style="font-size: 15px">add</i>
+          </a>
+          <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+            <li><a class="dropdown-item" href="{% url 'texam:new-test' %}">New test...</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'texam:sign-out' %}">Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</header>

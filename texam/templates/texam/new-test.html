@@ -1,0 +1,67 @@
+{% extends "_base.html" %}
+{% block content %}
+{% include 'texam/partials/navbar.html' %}
+<main id="new-test">
+    <div class="container">
+        <h2>Create a new test</h2>
+        <p class="text-small text-muted">
+            This will contain all the submissions from your students
+        </p>
+
+        <div class="divider"></div>
+        <form class="mt-4" method="POST" action="{% url 'texam:new-test' %}">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-sm-4">
+                    <label for="test_id" class="form-label text-muted">Test ID *</label>
+                    <input 
+                    id="test_id" 
+                    name="test_id"
+                    required
+                    class="form-control input-gray form-control-sm"/>
+                    {{ form.test_id.errors }}
+                </div>
+                <div class="col-sm-8">
+                    <label for="name" class="form-label text-muted">Test name *</label>
+                    <input 
+                    id="name" 
+                    required
+                    name="name" 
+                    class="form-control input-gray form-control-sm"/>
+                    {{ form.name.errors }}
+                </div>
+            </div>
+            <div class="mt-4">
+                <label for="description" class="form-label text-muted">Description <span class="text-muted text-small">(optional)</span></label>
+                <input 
+                id="description" 
+                class="form-control input-gray form-control-sm" 
+                name="description"/>
+                {{ form.description.errors }}
+            </div>
+            <div class="mt-4">
+                <label for="submission_time" class="form-label text-muted">Submission Date & Time *</label>
+                <input 
+                id="submission_time" 
+                name="submission_time" 
+                required 
+                type="datetime-local" 
+                class="form-control input-gray form-control-sm"/>
+                {{ form.submission_time.errors }}
+            </div>
+            <div class="mt-4 form-check">
+                <input 
+                id="allow_late_submission" 
+                class="form-check-input" 
+                type="checkbox" 
+                name="allow_late_submission"/>
+                <label for="allow_late_submission" class="form-check-label form-label text-muted">Allow Late Submission</label>
+            </div>
+            {{ form.allow_late_submission.errors }}
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary btn-sm">Create test</button>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

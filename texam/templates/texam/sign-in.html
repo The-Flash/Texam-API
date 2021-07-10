@@ -1,0 +1,17 @@
+{% extends "_base.html" %}
+{% block content %}
+<form action="{% url 'texam:sign-in' %}" method="post">
+    {% csrf_token %}
+    <div>
+        <label for="username">Staff ID</label>
+        <input required name="username" id="username"/>
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input required type="password" name="password" id="password"/>
+    </div>
+    <div>
+        <button type="submit">Sign In</button>
+    </div>
+</form>
+{% endblock %}

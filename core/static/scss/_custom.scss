@@ -1,0 +1,44 @@
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+.text-small {
+    font-size: 85%;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+html {
+    min-height: 100vh;
+}
+
+body {
+    min-height: 100vh;
+}
+
+main {
+    
+}
+
+.divider {
+    // height: 1px;
+    margin: 5px 0px;
+    background-color: rgba(168, 76, 76, 0.02);
+    border: 0.5px solid rgba(0, 0, 0, 0.02);
+    // box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+  }
+
+
+.form-label {
+    font-weight: bold;
+}
+
+.input-gray {
+    background-color: #FAFBFC!important;
+}
