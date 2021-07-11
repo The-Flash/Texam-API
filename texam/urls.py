@@ -9,5 +9,6 @@ urlpatterns = [
     path("sign-out/", views.signout, name="sign-out"),
     path("home/", views.HomeView.as_view(), name="home"),
     path("new-test/", views.NewTestView.as_view(), name="new-test"),
-    path("test/<int:pk>/", views.TestDetailsView.as_view(), name="test-details")
+    path("test/<int:pk>/", views.TestDetailsView.as_view(), name="test-details"),
+    path("test/upload/", views.TestUploadView.as_view(), name="test-upload")
 ]

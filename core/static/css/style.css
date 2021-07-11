@@ -10748,6 +10748,7 @@ textarea.form-control-lg {
 }
 body {
   font-family: "Nunito", sans-serif;
+  overflow-x: hidden;
 }
 
 .text-small {
@@ -10789,6 +10790,35 @@ body {
 .errorlist li {
   font-size: 14px;
   color: red;
+}
+
+#sidebar {
+  padding: 2rem;
+  height: 100vh;
+}
+#sidebar .heading {
+  padding-bottom: 1.5rem;
+}
+#sidebar .heading h5 {
+  font-weight: 700;
+  font-size: 14px;
+}
+#sidebar ul {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+#sidebar li {
+  display: flex;
+  justify-content: space-between;
+}
+#sidebar li a {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#main-content {
+  background-color: #F6F8FA;
 }
 
 #new-test {

@@ -3,10 +3,22 @@
 {% include 'texam/partials/navbar.html' %}
 <main id="home">
    <div class="row">
-        <div id="sidebar" class="col-sm-3">
-            Sidebar
+        <div id="sidebar" class="col-sm-2 shadow-sm">
+            <div class="heading">
+                <h5>My Tests</h5>
+            </div>
+            <div>
+                <ul>
+                    {% for test in tests %}
+                    <li>
+                        <span class="material-icons text-primary">save</span>
+                        <a href="{% url 'texam:test-details' test.pk %}">{{test.name}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-        <div id="main-content" class="col-sm-9">
+        <div id="main-content" class="col-sm-10">
             Main Content
         </div>
    </div>

@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'import_export'
+    'import_export',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Import_Export Settings
 IMPORT_EXPORT_USE_TRANSACTIONS = True
+
+# SUBMISSIONS Settings
+SUBMISSIONS_DIR = BASE_DIR / "submissions"

@@ -1,0 +1,31 @@
+#sidebar {
+    padding: 2rem;
+    height: 100vh;
+    .heading {
+        padding-bottom: 1.5rem;
+        
+        h5 {
+            font-weight: 700;
+            font-size: 14px;
+        }
+    }
+
+    ul {
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+    }
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        a {
+            font-weight: bold;
+            text-decoration: none;
+        }
+    }
+}
+
+#main-content {
+    background-color: #F6F8FA;
+}

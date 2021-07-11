@@ -46,5 +46,8 @@ class TestSubmission(models.Model):
     submission_time = models.DateTimeField(default=timezone.now)
     tree = models.CharField(max_length=40, blank=True, null=True)
 
+    def is_late_submission(self):
+        return self.submission_time > self.test.submission_time
+
     def __str__(self) -> str:
         return str(self.test) + "/" + str(self.student)
