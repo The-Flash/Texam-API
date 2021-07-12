@@ -25,7 +25,7 @@ def get_object_path(repo_path: Path, hash):
 def get_object_parts(path):
     with open(path, "rb") as f:
         data = zlib.decompress(f.read())
-        header, body = data.split(b"\x00")
+        header, body = data.split(b"\x00", maxsplit=1)
     return header, body
 
 def get_root_commit(repo_path: Path):
@@ -80,8 +80,9 @@ def render_tree_content(content):
     content = content.split("\n")
     tree_content = []
     for tree in content:
-        (type, hash, obj_name) = tree.split()
-        tree_content.append(obj_name)
+        parts = tree.split()
+        if len(parts) > 0:
+            tree_content.append(parts[2])
     return tree_content
 
 
@@ -93,7 +94,10 @@ def get_content(repo_path: Path, hash):
     object_path = get_object_path(repo_path, hash)
     header, body = get_object_parts(object_path)
     header = header.decode()
-    body = body.decode()
+    try:
+        body = body.decode()
+    except UnicodeDecodeError:
+        return "Oops! Cannot render this file"
     if header == "tree":
         return render_tree_content(body)
     elif header == "blob":
