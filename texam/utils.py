@@ -87,7 +87,6 @@ def render_tree_content(content):
 
 def render_blob_content(content):
     content = content
-    print("Content", content)
     return content
 
 def get_content(repo_path: Path, hash):
