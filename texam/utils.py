@@ -66,7 +66,9 @@ def get_path_obj_entry(repo_path: Path, path_array=None, start_tree=None):
             try:
                 current_obj_index = path_array.index(obj_txt)
             except ValueError:
-                return None
+                print(obj_txt, type)
+                print("Got here")
+                continue
             return get_path_obj_entry(repo_path, path_array[current_obj_index + 1:], hash)
         # if the end has been reached
         # and a match has been found
@@ -75,12 +77,17 @@ def get_path_obj_entry(repo_path: Path, path_array=None, start_tree=None):
     return None
 
 def render_tree_content(content):
-    content = content
-    return content
+    content = content.split("\n")
+    tree_content = []
+    for tree in content:
+        (type, hash, obj_name) = tree.split()
+        tree_content.append(obj_name)
+    return tree_content
 
 
 def render_blob_content(content):
     content = content
+    print("Content", content)
     return content
 
 def get_content(repo_path: Path, hash):

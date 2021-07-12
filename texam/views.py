@@ -111,10 +111,13 @@ class TestSubmissionView(LoginRequiredMixin, View):
         if tree_path is None:
             path_array = None
             context["path"] = path_array
+            # context["tree_path"] = 
         else:
             path_array = parse_path_string(tree_path)
             context["path"] = self._path(path_array)
+            context["tree_path"] = tree_path
         obj_entry = get_path_obj_entry(repo_path, path_array)
+        print("Obj entry", obj_entry)
         if obj_entry is None:
             return HttpResponse("File/Folder has been removed or does not exist")
         context["entry"] = {

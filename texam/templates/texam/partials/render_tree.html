@@ -1,1 +1,11 @@
-<h1>This is a {{ entry.content }}</h1>
+<div>
+    <ul>
+    {% for c in entry.content %}
+        {% if tree_path %}
+            <li><a href="{% url 'texam:test-submission' test_id pk tree_path %}{{c}}">{{ c }}</a></li>
+        {% else %}
+            <li><a href="{% url 'texam:test-submission' test_id pk %}{{c}}">{{ c }}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+</div>
