@@ -1,0 +1,29 @@
+{% extends '_base.html' %}
+{% block content %}
+{% include 'texam/partials/navbar.html' %}
+<main id="test-details">
+   <div class="container">
+       {% if path %}
+       <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url 'texam:test-submission' test_id pk %}">.</a>
+        </li>
+        {% for p in path %}
+            <li class="breadcrumb-item"><a href="{% url 'texam:test-submission' test_id pk %}{{p.1}}">{{ p.0 }}</a></li>
+        {% endfor %}
+        </ol>
+        {% else %}
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'texam:test-submission' test_id pk %}">/</a>
+            </li>
+        </ol>
+       {% endif %}
+       {% if entry.type == "tree" %}
+            {% include "texam/partials/render_tree.html"%}
+        {% else %}
+            {% include "texam/partials/render_blob.html"%}
+       {% endif %}
+   </div>
+</main>
+{% endblock %}

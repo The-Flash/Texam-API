@@ -5,11 +5,19 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.conf import settings
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser
 from rest_framework import status
 from core import forms, models
+from .utils import (
+    parse_path_string,
+    get_repo_path,
+    get_path_obj_entry,
+    get_content
+)
 
 import os
 # Create your views here.
@@ -50,7 +58,7 @@ class HomeView(LoginRequiredMixin, View):
         }
         return render(request, self.template_name, context)
 
-class NewTestView(View):
+class NewTestView(LoginRequiredMixin, View):
     template_name = "texam/new-test.html"
     login_url = reverse_lazy("texam:sign-in")
 
@@ -73,19 +81,69 @@ class NewTestView(View):
         }
         return render(request, self.template_name, context)
     
-class TestDetailsView(View):
+class TestDetailsView(LoginRequiredMixin, View):
     template_name = "texam/test-details.html"
     login_url = reverse_lazy("texam:sign-in")
 
-    def get(self, request, pk, *args, **kwargs):
+    def get(self, request, test_id):
+        test = models.Test.objects.get(test_id=test_id)
         context = {
-            "title": "Test Detail | Texam"
+            "title": "Test Detail | Texam",
+            "test": test
         }
         return render(request, self.template_name, context)
 
 
+class TestSubmissionView(LoginRequiredMixin, View):
+    login_url = reverse_lazy("texam:sign-in")
+    template_name = "texam/test-submission.html"
+
+    def get(self, request, test_id, pk, tree_path=None):
+        print(test_id, pk)
+        context = {
+            "title": "Test Submission | Texam",
+            "test_id": test_id,
+            "pk": pk
+        }
+        test = models.Test.objects.get(test_id=test_id)
+        submission = models.TestSubmission.objects.get(pk=pk)
+        repo_path = get_repo_path(test, submission)
+        if tree_path is None:
+            path_array = None
+            context["path"] = path_array
+        else:
+            path_array = parse_path_string(tree_path)
+            context["path"] = self._path(path_array)
+        obj_entry = get_path_obj_entry(repo_path, path_array)
+        if obj_entry is None:
+            return HttpResponse("File/Folder has been removed or does not exist")
+        context["entry"] = {
+            "type": obj_entry[0],
+            "content": get_content(repo_path, obj_entry[1])
+        }
+        print(context["path"])
+        return render(request, self.template_name, context)
+
+    def _path(self, path_array):
+        result = []
+        i = 0
+        acc_path = ""
+        while i != len(path_array):
+            cur_value = path_array[i]
+            acc_path +=  cur_value + "/"
+            result.append((cur_value, acc_path))
+            i += 1
+        return result
+
+
+# @method_decorator(csrf_exempt, name='post')
 class TestUploadView(APIView):
     parsers = (MultiPartParser, )
+
+    def get(self, request, *args, **kwargs):
+        return Response({
+            "details": "Use post instead"
+        })
 
     def post(self, request, *args, **kwargs):
         try:

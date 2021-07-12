@@ -2,6 +2,10 @@
 {% block content %}
 {% include 'texam/partials/navbar.html' %}
 <main id="test-details">
-   
+   <div class="container">
+       {% for submission in test.submissions.all %}
+        <a href="{% url 'texam:test-submission' test.test_id submission.pk %}">{{ submission.student }}</a>
+       {% endfor %}
+   </div>
 </main>
 {% endblock %}

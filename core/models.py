@@ -41,7 +41,7 @@ class Test(models.Model):
         return self.name
 
 class TestSubmission(models.Model):
-    test = models.ForeignKey("Test", on_delete=models.CASCADE)
+    test = models.ForeignKey("Test", on_delete=models.CASCADE, related_name="submissions")
     student = models.ForeignKey("Student", on_delete=models.CASCADE)
     submission_time = models.DateTimeField(default=timezone.now)
     tree = models.CharField(max_length=40, blank=True, null=True)

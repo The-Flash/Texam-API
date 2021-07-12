@@ -12,7 +12,7 @@
                     {% for test in tests %}
                     <li>
                         <span class="material-icons text-primary">save</span>
-                        <a href="{% url 'texam:test-details' test.pk %}">{{test.name}}</a>
+                        <a href="{% url 'texam:test-details' test.test_id %}">{{test.name}}</a>
                     </li>
                     {% endfor %}
                 </ul>
